@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id("io.github.goooler.shadow") version "8.1.7"
+    id 'org.bytedeco.gradle-javacpp-platform' version "1.5.10"
+}
+
+group = 'teamti.fun'
+version = '0.1'
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+dependencies {
+    implementation("org.bytedeco:javacv-platform:1.5.10")
+}
+
+shadowJar {
+    archiveBaseName.set('FaceDetect')
+    archiveClassifier.set('')
+    archiveVersion.set('0.1')
+    exclude 'org/bytedeco/javacpp/linux-/.'
+    exclude 'org/bytedeco/javacpp/macosx-/.'
+    exclude 'lib/armeabi/.'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.SF'
+
+    manifest {
+        attributes 'Main-Class': 'teamti.fun.Camera'
+    }
+}
